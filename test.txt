@@ -1,1 +1,0 @@
-THIS IS THROUGH FILE PUT CONTENT hello umair.  file get content to terminal . World . THIS IS THROUGH FILE PUT CONTENTTHIS IS THROUGH FILE PUT CONTENT hello umair.  file get content to terminal . World . THIS IS THROUGH FILE PUT CONTENT
