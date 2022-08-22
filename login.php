@@ -7,9 +7,13 @@
         $row  = mysqli_fetch_array($result);
 
         if(is_array($row)) {
+
         $_SESSION["id"] = $row['id'];
         $_SESSION["name"] = $row['name'];
-        } else {
+
+        } 
+        else 
+        {
          $message = "Invalid Username or Password!";
         }
     }

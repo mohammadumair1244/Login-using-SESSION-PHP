@@ -11,7 +11,8 @@ session_start();
 <?php
 if($_SESSION["name"]) {
 ?>
-<h3 style="color: green;text-align:center">Welcome <?php echo $_SESSION["name"]; ?> </h3>.<button class="btn btn-danger" ><a style="color: white;text-decoration:none" href="logout.php" tite="Logout">Click here to Logout. </button>
+<h3 style="color: green;text-align:center">Welcome <?php echo $_SESSION["name"]; ?> </h3>.
+<a style="color: white;text-decoration:none" href="logout.php" tite="Logout"><button class="btn btn-danger" >Click here to Logout. </button></a>
 <?php
 }else echo "<h1 style='color: red;text-align:center'> Please login first .</h1>";
 ?>

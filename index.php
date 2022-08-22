@@ -10,8 +10,8 @@
 </head>
 <body class="bg-dark ">
 <div class="text-center btn-group d-flex justify-content-center d-md-table mx-auto p-5">
-    <a href="createe.php" ><button class="btn btn-outline-info" >New Here? Click to Register</button></a>
-    <a href="login.php" ><button class="btn btn-outline-success" >Login</button></a>
+    <a href="createe.php" ><button class="btn btn-info" >New Here? Click to Register</button></a>
+    <a href="login.php" ><button class="btn btn-success" >Login</button></a>
     <!-- <a href="update.php" ><button class="btn btn-outline-warning" >Click to Update a record</button></a>
     <a href="delete.php" ><button class="btn btn-outline-danger" >Click to Delete a record</button></a> -->
 </div>
