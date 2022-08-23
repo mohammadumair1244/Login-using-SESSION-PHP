@@ -19,7 +19,7 @@
         </div>
           <div class="form-group" style="text-align: center">
             <label for="">Email </label>
-            <input name="email" type="text" class="form-control col-lg-4 mx-auto" id="email"  placeholder="Enter Email">
+            <input name="email" type="email" class="form-control col-lg-4 mx-auto" id="email"  placeholder="Enter Email">
           </div>
           <div class="form-group" style="text-align: center">
             <label for="">Age </label>
@@ -42,16 +42,31 @@ if (isset($_POST['fname']) && isset($_POST['email']) && isset($_POST['age']) && 
   $email=$_POST['email'];
   $age=$_POST['age'];
   $pass=$_POST['pass'];
+  $con = mysqli_connect('localhost','root','','php-reg') or die('Unable To connect');
+  $chk= "SELECT * FROM `login_user` WHERE email='$email'";
 
-  $sql=" INSERT INTO `login_user` (`name`, `email`, `age`, `password`) VALUES ('$fname', '$email', '$age', '$pass')";
+  $result = mysqli_query($con,$chk);
+  $row_cnt = mysqli_num_rows($result);
+  if ($row_cnt === 0) {
 
-  if (mysqli_query($con, $sql)) {
-    echo "User Registered successfully";
-    echo "<br><a href='login.php' ><button style='display:block;margin:auto' class='btn btn-success' >Login</button></a>";
-    // header('Location: create.php');
-  } else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($con);
+    $sql=" INSERT INTO `login_user` (`name`, `email`, `age`, `password`) VALUES ('$fname', '$email', '$age', '$pass')";
+  
+    if (mysqli_query($con, $sql)) {
+      echo "User Registered successfully";
+      echo "<br><a href='login.php' ><button style='display:block;margin:auto' class='btn btn-success' >Login</button></a>";
+    }
+    else 
+   {
+    echo "Error Adding user: " . $sql . "<br>" . mysqli_error($con);
+   }
+ // header('Location: create.php');
   }
+  else{
+    echo "Email already Exists";
+    echo "<br><a href='login.php' ><button style='display:block;margin:auto' class='btn btn-success' >Login</button></a>";
+
+  }
+   
 }
 mysqli_close($con);
 
