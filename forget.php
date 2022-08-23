@@ -36,11 +36,6 @@ if (isset($_POST['send'])) {
     $emailfg = $_POST['emailfg'];
     $_SESSION['emailfg'] = $emailfg;
     echo "<br>";
-    // $pa = "SELECT password from `login_user` WHERE email='$emailfg'";
-    // $result = mysqli_query($con, $pa);
-    // $row = mysqli_fetch_assoc($result);
-    // $mimp = $row['password'];
-    // echo "<br>";
 
     $code = rand(111111, 999999);
 
@@ -51,8 +46,6 @@ if (isset($_POST['send'])) {
     $message = "Your Verification Code is: " . "<br><br><br>" . $code . "<br><br>"
         . "Enter it on you Forget Password Screen";
 
-    // $token = rand(10,9999);
-    // echo $token;
 
     try {
 
@@ -97,34 +90,30 @@ if (isset($_POST['verifsend'])) {
     if ($_POST['verifcode'] == $_SESSION['session_otp']) {
         echo "<h4>Code Matched</h4>";
         echo "<h3>Enter Your New Password</h3>";
-        ?>
-         <form method="POST" action="" class="mx-auto">
+    ?>
+        <form method="POST" action="" class="mx-auto">
             New Password: <input type="text" class="form-control" name="newpass"><br>
             Confirm Password: <input type="text" class="form-control" name="confpass"><br>
             <input type="submit" class="btn btn-info mx-auto" name="newsend" value="Submit">
         </form>
-        <?php
-    }
-    else {
+<?php
+    } else {
         echo "<h1>CODE NOT SAME</h1>";
     }
-    // echo $_SESSION['emailfg'];
 }
 
-       
-        if (isset($_POST['newsend'])) {
-        //    echo "<br>IN NEWSEND ... IS SET<br>";
-            $newpassword = $_POST['confpass'];
-            if ($_POST['newpass'] == $_POST['confpass']) {
-                $con = mysqli_connect('localhost', 'root', '', 'php-reg') or die('Unable To connect');
-                $newpass = "UPDATE `login_user` SET password='$newpassword' WHERE email='$_SESSION[emailfg]'";
-                mysqli_query($con,$newpass);
-                echo "Password Changed";
-                echo "<br><a href='login.php' ><button style='display:block;margin:auto' class='btn btn-success' >Login</button></a>";
 
-            } else {
-                echo "Password not match";
-            }
-        }
+if (isset($_POST['newsend'])) {
+    $newpassword = $_POST['confpass'];
+    if ($_POST['newpass'] == $_POST['confpass']) {
+        $con = mysqli_connect('localhost', 'root', '', 'php-reg') or die('Unable To connect');
+        $newpass = "UPDATE `login_user` SET password='$newpassword' WHERE email='$_SESSION[emailfg]'";
+        mysqli_query($con, $newpass);
+        echo "Password Changed";
+        echo "<br><a href='login.php' ><button style='display:block;margin:auto' class='btn btn-success' >Login</button></a>";
+    } else {
+        echo "Password not match";
+    }
+}
 
 ?>
