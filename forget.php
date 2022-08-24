@@ -41,6 +41,9 @@ if (isset($_POST['send'])) {
 
     $_SESSION['session_otp'] = $code;
 
+    $timestamp = $_SERVER['REQUEST_TIME'];
+    $_SESSION['time'] = $timestamp;
+
     $to = $_POST['emailfg'];
     $subject = "Password Reset";
     $message = "Your Verification Code is: " . "<br><br><br>" . $code . "<br><br>"
@@ -77,7 +80,7 @@ if (isset($_POST['send'])) {
 
 ?>
     <form method="POST" action="" class="mx-auto">
-        Enter Verification Code E-Mailed to you:<input type="text" class="form-control" name="verifcode"><br>
+        Enter Verification Code E-Mailed to you:<br>The Time Expires in 5 Minutes <input type="text" class="form-control" name="verifcode"><br>
         <input type="submit" class="btn btn-info mx-auto" name="verifsend" value="Submit">
     </form>
     <?php
@@ -86,19 +89,26 @@ if (isset($_POST['send'])) {
 }
 
 if (isset($_POST['verifsend'])) {
+    $timestamp =  $_SERVER["REQUEST_TIME"];
 
-    if ($_POST['verifcode'] == $_SESSION['session_otp']) {
-        echo "<h4>Code Matched</h4>";
-        echo "<h3>Enter Your New Password</h3>";
+    if (($timestamp - $_SESSION['time']) <= 300) {
+
+
+        if ($_POST['verifcode'] == $_SESSION['session_otp']) {
+            echo "<h4>Code Matched</h4>";
+            echo "<h3>Enter Your New Password</h3>";
     ?>
-        <form method="POST" action="" class="mx-auto">
-            New Password: <input type="text" class="form-control" name="newpass"><br>
-            Confirm Password: <input type="text" class="form-control" name="confpass"><br>
-            <input type="submit" class="btn btn-info mx-auto" name="newsend" value="Submit">
-        </form>
+            <form method="POST" action="" class="mx-auto">
+                New Password: <input type="text" class="form-control" name="newpass"><br>
+                Confirm Password: <input type="text" class="form-control" name="confpass"><br>
+                <input type="submit" class="btn btn-info mx-auto" name="newsend" value="Submit">
+            </form>
 <?php
+        } else {
+            echo "<h1>CODE NOT SAME</h1>";
+        }
     } else {
-        echo "<h1>CODE NOT SAME</h1>";
+        echo "<h3>TIME EXPIRED</h3>";
     }
 }
 
